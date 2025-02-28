@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.DataProvider;
 import pageObjects.basePage.CommonPage;
 
 import java.util.List;
@@ -32,7 +33,6 @@ public class LogInPage extends CommonPage {
 
     // This is a factory method that returns an instance of the class.
     /*public static LogInPage init() {
-        return new LogInPage();
+        return new LogInPage(driver);
     }*/
-
 }
