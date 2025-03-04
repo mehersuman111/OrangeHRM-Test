@@ -1,5 +1,6 @@
 package framework.browserCofig;
 
+import framework.urlConnector.URLConnector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
@@ -31,8 +32,13 @@ public class TestInit {
         properties = new Properties();
         properties.load(fileReader);
 
-        // Open the browser and navigate to the URL
-        driver.get(properties.getProperty("orangeHRM.URL"));
+        //To check the connectivity status of the URL
+        if (URLConnector.checkURLConnectivity(properties.getProperty("orangeHRM.URL"))) {
+            System.out.println("URL is connecting properly.");
+            driver.get(properties.getProperty("orangeHRM.URL"));
+        } else {
+            System.out.println("URL is not connecting. Please check the URL.");
+        };
 
         ls = new LogInService(driver);
         dashboardService = new DashboardService(driver);
