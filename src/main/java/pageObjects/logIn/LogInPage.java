@@ -31,6 +31,11 @@ public class LogInPage extends CommonPage {
         PageFactory.initElements(driver, this);
     }
 
+    public LogInPage verifyAvailableDetailsInLoginPage () {
+
+        return this;
+    }
+
     // This is a factory method that returns an instance of the class.
     /*public static LogInPage init() {
         return new LogInPage(driver);

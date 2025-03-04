@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SuiteName">
+    <test name="TestName">
+        <classes>
+            <class name="webTest.LoginMgmt.LoginTest"></class>
+            <class name="webTest.dashboard.DashboardTest"/>
+        </classes>
+    </test>
+</suite>
