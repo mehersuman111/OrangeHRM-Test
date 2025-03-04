@@ -12,7 +12,7 @@ public class LoginTest extends TestInit {
                 {"agent", "agent@123"},
                 {"user", "user@123"},
                 {"manager", "manager@123"},
-                {"Admin", "admin123"}
+                {properties.getProperty("username"), properties.getProperty("password")}
         };
         return data;
     }
