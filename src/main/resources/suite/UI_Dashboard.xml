@@ -1,9 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteName">
     <test name="TestName">
+        <parameter name="browser" value="chrddome"></parameter>
         <classes>
             <class name="webTest.LoginMgmt.LoginTest"></class>
             <class name="webTest.dashboard.DashboardTest"/>
+            <class name="webTest.admin.userManagement.UserManagementTest"></class>
+          <!-- <class name="webTest.starterHelp.StarterHelpTest"></class> -->
         </classes>
     </test>
 </suite>

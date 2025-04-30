@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest extends TestInit {
-    @DataProvider(name = "loginCredentials")
+    @DataProvider(name = "loginCredentials",indices = {4})
     Object[][] loginCredentialData() {
         Object data[][] = {
                 {"admin", "admin@123"},
@@ -22,7 +22,7 @@ public class LoginTest extends TestInit {
         ls.verifyAvailableDetailsInLoginPage();
     }
     // Test case to validate login functionality
-    @Test(dataProvider = "loginCredentials", priority = 2)
+    @Test(dataProvider = "loginCredentials" , priority = 2)
     public void UI_Web_02_Test_Login(String username, String password) {
 
         ls.provideLoginCredential(username, password)
