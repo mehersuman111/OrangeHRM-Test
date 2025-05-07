@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.dashboard.DashboardScreen;
 
 public class DashboardService extends DashboardScreen {
-
-
     public DashboardService(WebDriver driver) {
         super(driver);
     }
