@@ -50,7 +50,7 @@ public class TestInit extends ChromeBrowserConfig {
         switch (br.toLowerCase()) {
          case "chrome":
                 System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
-                driver = new ChromeDriver(options);
+                driver = new ChromeDriver(getChromeOptions());
                 break;
             case "edge":
                 System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
