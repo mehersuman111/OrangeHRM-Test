@@ -1,7 +1,10 @@
 package framework.browserCofig;
 
+import framework.visualEvidence.ScreenshotManager;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -12,6 +15,7 @@ import org.testng.asserts.SoftAssert;
 import services.admin.userMgmt.UserManagementService;
 import services.dashboard.DashboardService;
 import services.logIn.LogInService;
+import services.myInfo.personalDetails.PersonalDetailsService;
 import services.starterHelp.StarterHelpService;
 
 import java.io.FileReader;
@@ -23,18 +27,19 @@ import java.util.concurrent.TimeUnit;
 
 public class TestInit extends ChromeBrowserConfig {
 
-    protected static WebDriver driver;
+    public static WebDriver driver;
     public static Logger logger;
     protected LogInService ls;
     protected static DashboardService dashboardService;
     protected static StarterHelpService starterHelpService;
     public static Properties properties;
     public static UserManagementService userManagementService;
+    public static PersonalDetailsService personalDetailsService;
 
     //Implementing the Soft Assertion (Verify method)
     SoftAssert softAssert = new SoftAssert();
 
-    //@BeforeClass
+
     //@BeforeSuite
     @BeforeTest
     @Parameters({"browser"})
@@ -42,6 +47,8 @@ public class TestInit extends ChromeBrowserConfig {
         System.out.println("The setup method is getting started ...");
         logger = LogManager.getLogger(this.getClass());
         //PropertyConfigurator.configure(".\\src\\main\\resources\\log4j2.properties");
+        String log4jConfigPath = ".\\src\\main\\resources\\log4j2\\log4j2.xml";
+        Configurator.initialize(null,log4jConfigPath);
 
         String xmlFileName = context.getSuite().getXmlSuite().getFileName();
         String browserName = context.getSuite().getXmlSuite().getParameter("browser");
@@ -65,10 +72,12 @@ public class TestInit extends ChromeBrowserConfig {
                 return;
         }
 
+        driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
         // Read the properties file
+        logger.info("Setting up the property file...");
         FileReader fileReader = new FileReader(".\\src\\main\\resources\\property\\config.properties");
         properties = new Properties();
         properties.load(fileReader);
@@ -77,6 +86,7 @@ public class TestInit extends ChromeBrowserConfig {
         dashboardService = new DashboardService(driver);
         starterHelpService = new StarterHelpService(driver);
         userManagementService = new UserManagementService(driver);
+        personalDetailsService = new PersonalDetailsService(driver);
 
         //To check the connectivity status of the URL
         URL url = new URL(properties.getProperty("orangeHRM.URL"));
@@ -96,12 +106,12 @@ public class TestInit extends ChromeBrowserConfig {
         }
     }
 
-    @AfterTest
+   /* @AfterTest
     public void tearDown() {
         softAssert.assertAll();
         if (driver!=null) {
             driver.quit();
         }
         System.out.println("Test Suite execution has been completed.");
-    }
+    }*/
 }

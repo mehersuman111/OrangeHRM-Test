@@ -116,4 +116,15 @@ public class CommonPage extends PageInit {
         LogManagement.logMessage("INFO", value + " has been entered in the " + elementName + " field");
         return this;
     }
+    public CommonPage getElementSource(WebElement btn,String attName) {
+        try {
+            System.out.println(driver.getPageSource());
+            LogManagement.logMessage("INFO", btn.getDomAttribute(attName));
+            System.out.println(btn.getAttribute(attName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
 }

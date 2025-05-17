@@ -1,11 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteName">
-    <parameter name="browser" value="chrome"></parameter>
+        <parameter name="browser" value="Edge"/>
+        <listeners>
+            <listener class-name="framework.listenerActions.ExtentReportManager"></listener>
+        </listeners>
     <test name="TestName">
         <classes>
             <class name="webTest.LoginMgmt.LoginTest"></class>
-            <class name="webTest.dashboard.DashboardTest"/>
-            <class name="webTest.admin.userManagement.UserManagementTest"></class>
+            <class name="webTest.myInfo.PersonalDetailsTest"/>
+            <!-- <class name="webTest.admin.userManagement.UserManagementTest"></class> -->
           <!-- <class name="webTest.starterHelp.StarterHelpTest"></class> -->
         </classes>
     </test>

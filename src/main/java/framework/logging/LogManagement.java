@@ -1,13 +1,11 @@
 package framework.logging;
 
 import framework.browserCofig.TestInit;
-
-
 public class LogManagement {
     public static void logMessage(String level, String message) {
         switch (level) {
             case "INFO":
-                TestInit.logger.info(message);
+                TestInit.logger.trace(message);
                 break;
             case "DEBUG":
                 TestInit.logger.debug(message);

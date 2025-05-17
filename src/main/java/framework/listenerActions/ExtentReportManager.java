@@ -5,10 +5,12 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import framework.visualEvidence.ScreenshotManager;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 
@@ -41,6 +43,12 @@ public class ExtentReportManager implements ITestListener {
     public void onTestFailure(ITestResult result) {
         test = reports.createTest(result.getName());
         test.log(Status.FAIL,"Testcase failed is " + result.getName());
+        try {
+            String imagePath = ScreenshotManager.takeScreenShot(result.getName());
+            test.addScreenCaptureFromPath(imagePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void onTestSkipped(ITestResult result) {
         // not implemented

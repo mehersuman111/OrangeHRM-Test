@@ -2,10 +2,9 @@ package webTest.admin.userManagement;
 
 import framework.browserCofig.TestInit;
 import org.testng.annotations.Test;
-import services.admin.userMgmt.UserManagementService;
 
-public class UserManagementTest extends TestInit {
 
+public class UserManagementTest extends TestInit{
     @Test(priority = 1)
     public void UI_UserManagement_01_Verify_UserManagement_Screen() throws InterruptedException {
         userManagementService.verifyAvailableDetailsInUserManagementPage();
