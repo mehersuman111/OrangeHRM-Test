@@ -7,11 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import pageObjects.basePage.CommonPage;
 import services.admin.userMgmt.UserManagementService;
 import services.dashboard.DashboardService;
 import services.logIn.LogInService;
@@ -25,7 +27,7 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class TestInit extends ChromeBrowserConfig {
+public class TestInit {
 
     public static WebDriver driver;
     public static Logger logger;
@@ -38,6 +40,7 @@ public class TestInit extends ChromeBrowserConfig {
 
     //Implementing the Soft Assertion (Verify method)
     SoftAssert softAssert = new SoftAssert();
+    BrowserOptionConfig boc = new BrowserOptionConfig();
 
 
     //@BeforeSuite
@@ -57,11 +60,11 @@ public class TestInit extends ChromeBrowserConfig {
         switch (br.toLowerCase()) {
          case "chrome":
                 System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
-                driver = new ChromeDriver(getChromeOptions());
+                driver = new ChromeDriver(boc.getChromeOptions().chromeOptions);
                 break;
             case "edge":
                 System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
-                driver = new EdgeDriver();
+                driver = new EdgeDriver(boc.getEdgeOptions().edgeOptions);
                 break;
             case "firefox":
                 System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
@@ -72,9 +75,13 @@ public class TestInit extends ChromeBrowserConfig {
                 return;
         }
 
+        logger.info("Managing the web driver instance setting i.e., Cookies deletion, Implicit wait, Window maximize, " +
+                                    "Page Load time, Script duration etc.");
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
 
         // Read the properties file
         logger.info("Setting up the property file...");
@@ -104,14 +111,20 @@ public class TestInit extends ChromeBrowserConfig {
                 System.out.println("URL is not connecting properly and there is some client side issue happening");
             }
         }
+        // Open web URL from the auto-suggestion
+        /*CommonPage cp = new CommonPage(driver);
+        cp.provideTextFieldValue(ls.searchBox, "OrangeHRM")
+                .selectFromAutoSuggestDD(cp.suggestedList,"aria-label","orangehrm login")
+                .selectFromAvailableURLs(cp.availableURLs,properties.getProperty("orangeHRM.URL"))
+                .validateCurrentURL(properties.get("orangeHRM.URL").toString());*/
     }
 
-   /* @AfterTest
+    @AfterTest
     public void tearDown() {
         softAssert.assertAll();
         if (driver!=null) {
             driver.quit();
         }
         System.out.println("Test Suite execution has been completed.");
-    }*/
+    }
 }

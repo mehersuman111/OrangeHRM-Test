@@ -6,6 +6,7 @@ import pageObjects.logIn.LogInPage;
 
 public class LogInService extends LogInPage {
 
+    //Constructor
     public LogInService(WebDriver driver) {
         super(driver);
     }
@@ -16,7 +17,8 @@ public class LogInService extends LogInPage {
                 .checkAvailableElement(password, "Password")
                 .checkAvailableElement(loginButton, "Login Button")
                 .checkAvailableElement(forgotPasswordLink, "Forgot Password Link")
-                .checkAvailableElement(companyLinks, "Company Link", " ");
+                .checkAvailableElement(companyLinks, "Company Link", " ")
+                .verifyTextElement(pageName,"Login");
         return this;
     }
     public LogInService provideLoginCredential (String uNameVal, String pwdVal) {

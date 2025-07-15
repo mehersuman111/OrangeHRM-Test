@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestNG">
-    <parameter name="browser" value="chrome"></parameter>
+    <parameter name="browser" value="edge"></parameter>
     <test name="TestName">
         <classes>
             <class name="webTest.LoginMgmt.LoginTest"></class>

@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="UI_Listener">
-        <parameter name="browser" value="Chrome"/>
+        <parameter name="browser" value="Edge"/>
     <listeners>
         <listener class-name="framework.listenerActions.ExtentReportManager"></listener>
     </listeners>
