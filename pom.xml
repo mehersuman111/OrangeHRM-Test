@@ -78,12 +78,22 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.4.1</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
     </dependencies>
+
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -25,11 +25,19 @@ public class UserManagementService extends UserManagementScreen implements Admin
     public UserManagementService verifyAvailableDetailsInUserManagementPage() throws InterruptedException {
         selectAMenu("Admin","Active")
                 .letPanelArrowButtonClick("left","right")
+<<<<<<< HEAD
                 .checkAvailableElement(systemUsersHeader,"System Users",2);
         return this;
     }
     public UserManagementService verifyAvailableOptionsWithUserManagement() throws InterruptedException {
         verifyAvailableDropdownOptions(selectDropdowns.get(0),AdminData.userMgmtRoleOptions,2)
+=======
+                .checkAvailableElement(systemUsersHeader,"System Users",3);
+        return this;
+    }
+    public UserManagementService verifyAvailableOptionsWithUserManagement() throws InterruptedException {
+        verifyAvailableDropdownOptions(selectDropdowns.get(0),AdminData.userMgmtRoleOptions,3)
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
                 .verifyAvailableDropdownOptions(selectDropdowns.get(1),AdminData.userMgmtStatusOptions,3);
         return this;
     }
@@ -82,6 +90,7 @@ public class UserManagementService extends UserManagementScreen implements Admin
                 .checkAppearanceOfElement()
         return this;
         }*/
+<<<<<<< HEAD
     public UserManagementService clickOnAddUserBtn() {
         clickOnButton(addUserBtn,"Add user button").checkAppearanceOfElement(addUserHeader,"Add User header");
         return this;
@@ -92,4 +101,6 @@ public class UserManagementService extends UserManagementScreen implements Admin
         return this;
     }*/
 
+=======
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
     }

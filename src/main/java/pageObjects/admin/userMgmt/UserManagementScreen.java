@@ -27,6 +27,7 @@ public class UserManagementScreen extends CommonPage {
     protected WebElement searchButton;
     @FindBy(xpath = "//span[text()='No Records Found']")
     public WebElement noResult;
+<<<<<<< HEAD
     @FindBy(xpath = "//div[@class='orangehrm-header-container']//button")
     protected WebElement addUserBtn;
     @FindBy(xpath = "//h6[text()='Add User']")
@@ -38,6 +39,8 @@ public class UserManagementScreen extends CommonPage {
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
     protected WebElement empNameTF;
 
+=======
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 
     public UserManagementScreen(WebDriver driver) {
         super(driver);

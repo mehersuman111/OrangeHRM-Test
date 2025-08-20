@@ -45,6 +45,10 @@ public class TestInit {
     //Implementing the Soft Assertion (Verify method)
     SoftAssert softAssert = new SoftAssert();
     BrowserOptionConfig boc = new BrowserOptionConfig();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 
     //@BeforeSuite
     @BeforeTest
@@ -60,6 +64,7 @@ public class TestInit {
         String browserName = context.getSuite().getXmlSuite().getParameter("browser");
         System.out.println("Provided the browser param as '"+ browserName +"' in currently running the XML file " + xmlFileName);
         // Initialize the WebDriver based on the browser parameter
+<<<<<<< HEAD
         try {
             switch (br.toLowerCase()) {
                 case "Google Chrome":
@@ -83,6 +88,24 @@ public class TestInit {
             }
         } catch (WebDriverException e) {
             e.printStackTrace();
+=======
+        switch (br.toLowerCase()) {
+         case "chrome":
+                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
+                driver = new ChromeDriver(boc.getChromeOptions().chromeOptions);
+                break;
+            case "edge":
+                System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
+                driver = new EdgeDriver(boc.getEdgeOptions().edgeOptions);
+                break;
+            case "firefox":
+                System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
+                driver = new FirefoxDriver();
+                break;
+            default:
+                System.out.println("Browser not supported");
+                return;
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
         }
 
         logger.info("Managing the web driver instance setting i.e., Cookies deletion, Implicit wait, Window maximize, " +
@@ -100,7 +123,12 @@ public class TestInit {
         Point winPos = new Point(xWinPos, yWinPos);
         driver.manage().window().setPosition(winPos);
         driver.manage().window().maximize();
+<<<<<<< HEAD
         */
+=======
+        driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 
         // Read the properties file
         logger.info("Setting up the property file...");
