@@ -14,9 +14,9 @@ public class ScreenshotManager {
         TakesScreenshot takesScreenshot = (TakesScreenshot) TestInit.driver;
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         String targetFilePath = new String(System.getProperty("user.dir")+"\\outputs\\screenShots\\"+testName+timeStamp+".png");
-        File targhetFile = new File(targetFilePath);
+        File targetFile = new File(targetFilePath);
         //sourceFile.renameTo(targetFile);
-        FileUtils.copyFile(sourceFile,targhetFile);
+        FileUtils.copyFile(sourceFile,targetFile);
         return targetFilePath;
     }
 }

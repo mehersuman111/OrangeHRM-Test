@@ -5,18 +5,24 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import pageObjects.basePage.CommonPage;
 import services.admin.userMgmt.UserManagementService;
 import services.dashboard.DashboardService;
 import services.logIn.LogInService;
 import services.myInfo.personalDetails.PersonalDetailsService;
 import services.starterHelp.StarterHelpService;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +31,7 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class TestInit extends ChromeBrowserConfig {
+public class TestInit {
 
     public static WebDriver driver;
     public static Logger logger;
@@ -38,7 +44,7 @@ public class TestInit extends ChromeBrowserConfig {
 
     //Implementing the Soft Assertion (Verify method)
     SoftAssert softAssert = new SoftAssert();
-
+    BrowserOptionConfig boc = new BrowserOptionConfig();
 
     //@BeforeSuite
     @BeforeTest
@@ -54,27 +60,47 @@ public class TestInit extends ChromeBrowserConfig {
         String browserName = context.getSuite().getXmlSuite().getParameter("browser");
         System.out.println("Provided the browser param as '"+ browserName +"' in currently running the XML file " + xmlFileName);
         // Initialize the WebDriver based on the browser parameter
-        switch (br.toLowerCase()) {
-         case "chrome":
-                System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
-                driver = new ChromeDriver(getChromeOptions());
-                break;
-            case "edge":
-                System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
-                driver = new EdgeDriver();
-                break;
-            case "firefox":
-                System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
-                driver = new FirefoxDriver();
-                break;
-            default:
-                System.out.println("Browser not supported");
-                return;
+        try {
+            switch (br.toLowerCase()) {
+                case "Google Chrome":
+                    WebDriverManager.chromedriver().setup();
+                    //System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
+                    driver = new ChromeDriver(boc.getChromeOptions().chromeOptions);
+                    break;
+                case "MS Edge":
+                    //WebDriverManager.edgedriver().setup();
+                    System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
+                    driver = new EdgeDriver(boc.getEdgeOptions().edgeOptions);
+                    break;
+                case "Mozilla Firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    //System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
+                    driver = new FirefoxDriver();
+                    break;
+                default:
+                    System.out.println("Browser not supported");
+                    return;
+            }
+        } catch (WebDriverException e) {
+            e.printStackTrace();
         }
 
+        logger.info("Managing the web driver instance setting i.e., Cookies deletion, Implicit wait, Window maximize, " +
+                                    "Page Load time, Script duration etc.");
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
+        //driver.manage().window().maximize();
+        driver.manage().window().fullscreen();
+
+        /*
+        Dimension winSize = new Dimension(xWinSize, yWinSize);
+        driver.manage().window().setSize(winSize);
+        Point winPos = new Point(xWinPos, yWinPos);
+        driver.manage().window().setPosition(winPos);
         driver.manage().window().maximize();
+        */
 
         // Read the properties file
         logger.info("Setting up the property file...");
@@ -95,7 +121,8 @@ public class TestInit extends ChromeBrowserConfig {
 
         if (httpURLConnection.getResponseCode()>=200 && httpURLConnection.getResponseCode() < 300) {
             System.out.println("The URL provided '" + url + "' is connecting properly.");
-            driver.get(url.toString());
+            //driver.get(url.toString());
+            driver.navigate().to(url.toString());
         } else {
             System.out.println("URL is not connecting. Please check the URL.");
             if (httpURLConnection.getResponseCode() >= 400 && httpURLConnection.getResponseCode() < 500) {
@@ -104,14 +131,20 @@ public class TestInit extends ChromeBrowserConfig {
                 System.out.println("URL is not connecting properly and there is some client side issue happening");
             }
         }
+        // Open web URL from the auto-suggestion
+        /*CommonPage cp = new CommonPage(driver);
+        cp.provideTextFieldValue(ls.searchBox, "OrangeHRM")
+                .selectFromAutoSuggestDD(cp.suggestedList,"aria-label","orangehrm login")
+                .selectFromAvailableURLs(cp.availableURLs,properties.getProperty("orangeHRM.URL"))
+                .validateCurrentURL(properties.get("orangeHRM.URL").toString());*/
     }
 
-   /* @AfterTest
+    @AfterTest
     public void tearDown() {
         softAssert.assertAll();
         if (driver!=null) {
             driver.quit();
         }
         System.out.println("Test Suite execution has been completed.");
-    }*/
+    }
 }

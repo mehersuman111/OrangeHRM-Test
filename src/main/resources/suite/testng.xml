@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestNG">
-    <parameter name="browser" value="chrome"></parameter>
+    <parameter name="browser" value="MS Edge"></parameter>
+    <listeners>
+        <listener class-name="framework.listenerActions.ExtentReportManager"></listener>
+    </listeners>
     <test name="TestName">
         <classes>
             <class name="webTest.LoginMgmt.LoginTest"></class>
@@ -9,3 +12,5 @@
         </classes>
     </test>
 </suite>
+
+<!-- We must have all tag and param should be available in testng.xml file. -->

@@ -45,10 +45,16 @@ public class ExcelUtility {
         xssfWorkbook.close();
         fis.close();
     }
-    /*public void writeDataIntoFile(String fileName, String newFileName, String sheetName) throws FileNotFoundException {
+    public void writeDataIntoFile(String fileName, String newFileName, String sheetName) throws FileNotFoundException {
         FileOutputStream fos = new FileOutputStream(System.getProperty(".\\src\\test\\resources\\dataFiles\\excelData\\")+newFileName);
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
         XSSFSheet xssfSheet = xssfWorkbook.createSheet(sheetName);
         XSSFRow row = xssfSheet.createRow(0);
-    }*/
+    }
+    public void writeDataIntoFile(String testCaseName, boolean testResult, String newFileName, String sheetName) throws FileNotFoundException {
+        FileOutputStream fos = new FileOutputStream(System.getProperty(".\\src\\test\\resources\\dataFiles\\excelData\\")+newFileName);
+        XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+        XSSFSheet xssfSheet = xssfWorkbook.createSheet(sheetName);
+        XSSFRow row = xssfSheet.createRow(0);
+    }
 }
