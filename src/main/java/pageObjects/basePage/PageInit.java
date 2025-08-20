@@ -1,6 +1,5 @@
 package pageObjects.basePage;
 
-import framework.browserCofig.TestInit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 

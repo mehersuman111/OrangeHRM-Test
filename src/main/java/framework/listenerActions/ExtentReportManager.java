@@ -34,14 +34,16 @@ public class ExtentReportManager implements ITestListener {
         reports.setSystemInfo("Browser Type",context.getSuite().getXmlSuite().getParameter("browser"));
     }
     public void onTestStart(ITestResult result) {
-        // not implemented
+        String testName = result.getName();
+        String testDescription = result.getMethod().getDescription();
+        test = reports.createTest(testName,"<b><font color='#D8CBB8'>"+testDescription+"</font></b>");
     }
     public void onTestSuccess(ITestResult result) {
-        test = reports.createTest(result.getName());
+        //test = reports.createTest(result.getName());
         test.log(Status.PASS,"Testcase passed is " + result.getName());
     }
     public void onTestFailure(ITestResult result) {
-        test = reports.createTest(result.getName());
+        //test = reports.createTest(result.getName());
         test.log(Status.FAIL,"Testcase failed is " + result.getName());
         try {
             String imagePath = ScreenshotManager.takeScreenShot(result.getName());

@@ -5,7 +5,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -19,6 +22,7 @@ import services.dashboard.DashboardService;
 import services.logIn.LogInService;
 import services.myInfo.personalDetails.PersonalDetailsService;
 import services.starterHelp.StarterHelpService;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,7 +45,10 @@ public class TestInit {
     //Implementing the Soft Assertion (Verify method)
     SoftAssert softAssert = new SoftAssert();
     BrowserOptionConfig boc = new BrowserOptionConfig();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 
     //@BeforeSuite
     @BeforeTest
@@ -57,6 +64,31 @@ public class TestInit {
         String browserName = context.getSuite().getXmlSuite().getParameter("browser");
         System.out.println("Provided the browser param as '"+ browserName +"' in currently running the XML file " + xmlFileName);
         // Initialize the WebDriver based on the browser parameter
+<<<<<<< HEAD
+        try {
+            switch (br.toLowerCase()) {
+                case "Google Chrome":
+                    WebDriverManager.chromedriver().setup();
+                    //System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
+                    driver = new ChromeDriver(boc.getChromeOptions().chromeOptions);
+                    break;
+                case "MS Edge":
+                    //WebDriverManager.edgedriver().setup();
+                    System.setProperty("webdriver.edge.driver", ".\\src\\main\\resources\\driver\\msedgedriver.exe");
+                    driver = new EdgeDriver(boc.getEdgeOptions().edgeOptions);
+                    break;
+                case "Mozilla Firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    //System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
+                    driver = new FirefoxDriver();
+                    break;
+                default:
+                    System.out.println("Browser not supported");
+                    return;
+            }
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+=======
         switch (br.toLowerCase()) {
          case "chrome":
                 System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\driver\\chromedriver.exe");
@@ -73,15 +105,30 @@ public class TestInit {
             default:
                 System.out.println("Browser not supported");
                 return;
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
         }
 
         logger.info("Managing the web driver instance setting i.e., Cookies deletion, Implicit wait, Window maximize, " +
                                     "Page Load time, Script duration etc.");
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
+        //driver.manage().window().maximize();
+        driver.manage().window().fullscreen();
+
+        /*
+        Dimension winSize = new Dimension(xWinSize, yWinSize);
+        driver.manage().window().setSize(winSize);
+        Point winPos = new Point(xWinPos, yWinPos);
+        driver.manage().window().setPosition(winPos);
+        driver.manage().window().maximize();
+<<<<<<< HEAD
+        */
+=======
+        driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
+>>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 
         // Read the properties file
         logger.info("Setting up the property file...");
@@ -102,7 +149,8 @@ public class TestInit {
 
         if (httpURLConnection.getResponseCode()>=200 && httpURLConnection.getResponseCode() < 300) {
             System.out.println("The URL provided '" + url + "' is connecting properly.");
-            driver.get(url.toString());
+            //driver.get(url.toString());
+            driver.navigate().to(url.toString());
         } else {
             System.out.println("URL is not connecting. Please check the URL.");
             if (httpURLConnection.getResponseCode() >= 400 && httpURLConnection.getResponseCode() < 500) {
