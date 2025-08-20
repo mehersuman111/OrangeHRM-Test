@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.basePage.CommonPage;
 
+import java.util.List;
+
 public class PersonalDetailsTab extends CommonPage {
 
     @FindBy(linkText = "My Info")
@@ -49,6 +51,20 @@ public class PersonalDetailsTab extends CommonPage {
     protected WebElement nationalityDDfn;
     @FindBy(xpath = "//label[text()='Nationality']/../../div[2]")
     protected WebElement nationalityDDf;
+    @FindBy(xpath = "(//button[contains(@class,'oxd-button--medium')])[3]")
+    protected WebElement attachmentAddBtn;
+    @FindBy(xpath = "//a[contains(text(),'Imm')]")
+    protected WebElement immigrationTab;
+    @FindBy(xpath = "(//div[starts-with(@class,'oxd-select')])[10]")
+    protected WebElement bloodTypeDDBtn;
+    @FindBy(xpath = "//a[normalize-space(text())='Qualifications']")
+    protected WebElement qualificationTab;
+    @FindBy(xpath = "//button[normalize-space(@type)='submit']")
+    protected List<WebElement> saveButton;
+    @FindBy(xpath = "(//div[@class='oxd-date-input'])[2]/child::input")
+    protected WebElement dobInpF;
+    @FindBy(xpath = "(//div[@class='oxd-table-cell'])[2]/descendant::button")
+    protected List<WebElement> attachmentActions;
 
 
     public PersonalDetailsTab(WebDriver driver) {

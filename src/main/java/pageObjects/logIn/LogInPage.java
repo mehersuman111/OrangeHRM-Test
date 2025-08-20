@@ -11,6 +11,10 @@ import java.util.List;
 
 public class LogInPage extends CommonPage {
 
+    @FindBy(xpath = "//textarea[@title='Search']")
+    public WebElement searchBox;
+    @FindBy(xpath = "/html/body/div/div/div/div/div/div[2]/h5")
+    protected WebElement pageName;
     @FindBy(xpath = "//img[@alt='company-branding']")
     protected WebElement companyBranding;
     @FindBy(xpath = "//img[@alt='company-logo']")
