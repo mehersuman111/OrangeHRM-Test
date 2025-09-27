@@ -1,8 +1,8 @@
 package webTest.LoginMgmt;
 
 import framework.browserCofig.TestInit;
+import framework.annotations.TestCategory;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import testData.TestCases;
 
@@ -20,8 +20,8 @@ public class LoginTest extends TestInit {
     }
     // Testcase to verify the available details in the login page
     @Test(priority = 1, groups = {"regression"}, description = TestCases.tc_UI_0001)
+    @TestCategory("Regression")
     public void UI_Web_01_Test_Login_Page() {
-
         ls.verifyAvailableDetailsInLoginPage();
     }
     // Test case to validate login functionality

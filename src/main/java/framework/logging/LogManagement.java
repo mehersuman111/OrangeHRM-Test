@@ -4,7 +4,7 @@ import framework.browserCofig.TestInit;
 public class LogManagement {
     public static void logMessage(String level, String message) {
         switch (level) {
-            case "INFO":
+            case "TRACE":
                 TestInit.logger.trace(message);
                 break;
             case "DEBUG":

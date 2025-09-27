@@ -24,6 +24,9 @@ public class ExtentReportManager implements ITestListener {
         sparkReporter.config().setDocumentTitle("Automation Report");
         sparkReporter.config().setReportName("Functional Testing");
         sparkReporter.config().setTheme(Theme.DARK);
+        //Additional report UI configuration
+        sparkReporter.config().setEncoding("UTF-8"); // Set encoding
+        sparkReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'"); // Custom timestamp format
 
         reports = new ExtentReports();
         reports.attachReporter(sparkReporter);
@@ -32,6 +35,16 @@ public class ExtentReportManager implements ITestListener {
         reports.setSystemInfo("Test Engineer Name", "Suman Kumar Meher");   // Currently HardCoded
         reports.setSystemInfo("OS",System.getProperty("os.version"));
         reports.setSystemInfo("Browser Type",context.getSuite().getXmlSuite().getParameter("browser"));
+        reports.setSystemInfo("Java Version", System.getProperty("java.version"));
+        try {
+            reports.setSystemInfo("Host Name", InetAddress.getLocalHost().getHostName());
+            reports.setSystemInfo("IP Address", InetAddress.getLocalHost().getHostAddress());
+        } catch (Exception e) {
+            reports.setSystemInfo("Host Name", "Unknown");
+            reports.setSystemInfo("IP Address", "Unknown");
+        }
+        reports.setSystemInfo("Test Suite Name", context.getSuite().getName());
+        reports.setSystemInfo("Test Start Time", LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
     public void onTestStart(ITestResult result) {
         String testName = result.getName();

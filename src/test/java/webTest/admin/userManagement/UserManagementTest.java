@@ -1,10 +1,7 @@
 package webTest.admin.userManagement;
 
 import framework.browserCofig.TestInit;
-<<<<<<< HEAD
 import framework.listenerActions.RetryAnalyzer;
-=======
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
 import pageObjects.admin.userMgmt.UserManagementScreen;
@@ -13,11 +10,7 @@ import testData.RandomData;
 
 public class UserManagementTest extends TestInit{
     UserManagementScreen ums = new UserManagementScreen(driver);
-<<<<<<< HEAD
     @Test(priority = 1,retryAnalyzer = RetryAnalyzer.class)
-=======
-    @Test(priority = 1)
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
     public void UI_UserManagement_01_Verify_UserManagement_Screen() throws InterruptedException {
         logger.info("Verifying all available elements in the User Management screen.");
         userManagementService.verifyAvailableDetailsInUserManagementPage();
@@ -40,13 +33,15 @@ public class UserManagementTest extends TestInit{
                 .clickOnSearchButton()
                 .getUserSearchData();
         //ums.noResult
-<<<<<<< HEAD
     }
     @Test(priority = 5, enabled = true)
-    public void UI_UserManagement_04_Verify_Add_User_div() {
-        //userManagementService.clickOnButton()
-        //ums.noResult
-=======
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
+    public void UI_UserManagement_05_Verify_Add_User_screen() {
+        userManagementService.clickOnAddUserBtn()
+                .verifyAddUserForm();
+    }
+    @Test(priority = 6, enabled = true)
+    public void UI_UserManagement_06_Verify_Options_In_UserRole_DD() {
+        userManagementService.clickOnButton(userManagementService.userRoleDD, "User role dropdown field");
+                //.checkAppearanceOfElement();
     }
 }

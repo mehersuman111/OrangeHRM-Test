@@ -4,14 +4,11 @@ import com.beust.ah.A;
 import framework.logging.LogManagement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-<<<<<<< HEAD
 import org.openqa.selenium.*;
-=======
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,6 +37,7 @@ public class CommonPage extends PageInit {
     protected WebElement leftpanelBtn;
     @FindBy(xpath = "(//button[substring(@class,1,8)='oxd-icon'])[1]//i")
     protected WebElement leftPanelBtnArrowIcon;
+    //@FindBy(xpath = )
     private Logger logger = LogManager.getLogger(CommonPage.class);;
 
     public CommonPage(WebDriver driver) {
@@ -61,7 +59,8 @@ public class CommonPage extends PageInit {
         return this;
     }
 
-    public CommonPage clickOnButton(WebElement btn, String BtnName) {
+    public CommonPage clickOnButton(WebElement btn, String btnName) {
+        LogManagement.logMessage("INFO", "Clicking on the " + btnName + " button.");
         btn.click();
         return this;
     }
@@ -140,11 +139,8 @@ public class CommonPage extends PageInit {
         ddEle.click();
         checkAppearanceOfElement(optList, "Dropdown Options");
         List<WebElement> ddOptionsEle = optList.findElements(By.xpath("//div[@role='option']"));
-<<<<<<< HEAD
         Assert.assertEquals(ddOptionsEle.size(), totalOpts, "Total options are available in the dropdown is " + ddOptionsEle.size());
-=======
         Assert.assertEquals(ddOptionsEle.size(), totalOpts, "Total options are available in the dropdown is " + totalOpts);
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
         List<String> ddOptions = new ArrayList<>();
         for (WebElement ddOption : ddOptionsEle) {
             ddOptions.add(ddOption.getText());
@@ -248,13 +244,15 @@ public class CommonPage extends PageInit {
         Assert.assertTrue(leftPanelBtnArrowIcon.getAttribute("class").contains(arrowSideA));
         return this;
     }
-<<<<<<< HEAD
     // Utility to get the Shadow DOM element
     public WebElement getShadowDOM(WebElement ele, WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement shadowDOM = (WebElement) js.executeAsyncScript("return arguments[0].shadowRoot", ele);
         return  shadowDOM;
     }
-=======
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
+    public CommonPage verifyFieldState(WebElement ele, Boolean state, String eleName) {
+        Assert.assertEquals(ele.isEnabled(),state);
+        LogManagement.logMessage("INFO","Is the " + eleName + " is in enable state? " + ele.isEnabled());
+        return this;
+    }
 }

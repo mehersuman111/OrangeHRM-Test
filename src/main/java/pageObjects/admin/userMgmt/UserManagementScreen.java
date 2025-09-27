@@ -27,23 +27,21 @@ public class UserManagementScreen extends CommonPage {
     protected WebElement searchButton;
     @FindBy(xpath = "//span[text()='No Records Found']")
     public WebElement noResult;
-<<<<<<< HEAD
     @FindBy(xpath = "//div[@class='orangehrm-header-container']//button")
-    protected WebElement addUserBtn;
+    public WebElement addUserBtn;
     @FindBy(xpath = "//h6[text()='Add User']")
-    protected WebElement addUserHeader;
+    public WebElement addUserHeader;
     @FindBy(xpath = "(//div[@class='oxd-select-wrapper'])[1]")
-    protected WebElement userRoleDD;
+    public WebElement userRoleDD;
     @FindBy(xpath = "(//div[@class='oxd-select-wrapper'])[2]")
-    protected WebElement statusDD;
+    public WebElement statusDD;
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
-    protected WebElement empNameTF;
-
-=======
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
-
+    public WebElement empNameTF;
+    @FindBy(xpath = "//input[@class='oxd-input oxd-input--focus oxd-input--error']")
+    public WebElement userNameTF;
+    @FindBy(xpath = "//input[@class='oxd-input oxd-input--focus oxd-input--error']")
+    public WebElement passwordTF;
     public UserManagementScreen(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 }

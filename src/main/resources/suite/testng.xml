@@ -1,13 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestNG">
-<<<<<<< HEAD
     <parameter name="browser" value="MS Edge"></parameter>
-    <listeners>
+   <!-- <listeners>
         <listener class-name="framework.listenerActions.ExtentReportManager"></listener>
-    </listeners>
-=======
-    <parameter name="browser" value="edge"></parameter>
->>>>>>> 34b17698cf4c8763e7eaf26d8f4fd95dc6157e74
+    </listeners> -->
     <test name="TestName">
         <classes>
             <class name="webTest.LoginMgmt.LoginTest"></class>
