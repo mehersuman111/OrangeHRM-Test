@@ -1,14 +1,23 @@
 package services.logIn;
 
+import framework.browserCofig.TestInit;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import pageObjects.logIn.LogInPage;
+import services.dashboard.DashboardService;
 
 public class LogInService extends LogInPage {
 
+    private static LogInService logInService;
     //Constructor
     public LogInService(WebDriver driver) {
         super(driver);
+    }
+    public static LogInService getLogInService() {
+        if (logInService == null) {
+            logInService = new LogInService(TestInit.driver);
+        }
+        return logInService;
     }
     public LogInService verifyAvailableDetailsInLoginPage () {
         checkAvailableElement(companyBranding, "Company Branding")

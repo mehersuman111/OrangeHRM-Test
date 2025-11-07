@@ -1,6 +1,7 @@
 package framework.browserCofig;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.managers.OperaDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -28,10 +29,9 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class TestInit {
+    private static TestInit testInitInstance;
     public static WebDriver driver;
     public static Logger logger;
-    protected LogInService ls;
-    protected static DashboardService dashboardService;
     protected static StarterHelpService starterHelpService;
     public static Properties properties;
     public static UserManagementService userManagementService;
@@ -41,7 +41,15 @@ public class TestInit {
     SoftAssert softAssert = new SoftAssert();
     BrowserOptionConfig boc = new BrowserOptionConfig();
 
-
+    // Private constructor to prevent the initialization of this class from outside
+    /*private TestInit(){
+    }
+    public static TestInit getInstance(){
+        if (testInitInstance == null) {
+            testInitInstance = new TestInit();
+        }
+        return testInitInstance;
+    }*/
     //@BeforeSuite
     @BeforeTest
     @Parameters({"browser"})
@@ -69,8 +77,8 @@ public class TestInit {
                         driver = new EdgeDriver(boc.getEdgeOptions().edgeOptions);
                         break;
                     case "mozilla firefox":
-                        WebDriverManager.firefoxdriver().setup();
-                        //System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
+                        //WebDriverManager.firefoxdriver().setup();
+                        System.setProperty("webdriver.gecko.driver", ".\\src\\main\\resources\\driver\\geckodriver.exe");
                         driver = new FirefoxDriver();
                         break;
                     default:
@@ -87,10 +95,7 @@ public class TestInit {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
-        //driver.manage().window().maximize();
         driver.manage().window().fullscreen();
-
-
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.MINUTES);
@@ -101,8 +106,6 @@ public class TestInit {
         properties = new Properties();
         properties.load(fileReader);
 
-        ls = new LogInService(driver);
-        dashboardService = new DashboardService(driver);
         starterHelpService = new StarterHelpService(driver);
         userManagementService = new UserManagementService(driver);
         personalDetailsService = new PersonalDetailsService(driver);
@@ -127,7 +130,6 @@ public class TestInit {
         }
         // Open web URL from the auto-suggestion
     }
-
     @AfterTest
     public void tearDown() {
         softAssert.assertAll();

@@ -1,3 +1,13 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+*.json
+*.xml
+*.html
+*.jpg
+*.png
+*.jpeg
+*.xls
+*.xlsx
+*.pdf

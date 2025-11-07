@@ -9,7 +9,6 @@ import testData.RandomData;
 
 
 public class UserManagementTest extends TestInit{
-    UserManagementScreen ums = new UserManagementScreen(driver);
     @Test(priority = 1,retryAnalyzer = RetryAnalyzer.class)
     public void UI_UserManagement_01_Verify_UserManagement_Screen() throws InterruptedException {
         logger.info("Verifying all available elements in the User Management screen.");

@@ -1,11 +1,19 @@
 package services.dashboard;
 
+import framework.browserCofig.TestInit;
 import org.openqa.selenium.WebDriver;
 import pageObjects.dashboard.DashboardScreen;
 
 public class DashboardService extends DashboardScreen {
+    private static DashboardService dashboardService;
     public DashboardService(WebDriver driver) {
         super(driver);
+    }
+    public static DashboardService getDashboardService() {
+        if (dashboardService == null) {
+            dashboardService = new DashboardService(TestInit.driver);
+        }
+        return dashboardService;
     }
 
     public DashboardService verifyAvailableDetailsInDashboardPage() {

@@ -20,7 +20,8 @@ public class ExtentReportManager implements ITestListener {
     public ExtentTest test;
 
     public void onStart(ITestContext context) {
-        sparkReporter = new ExtentSparkReporter(".\\src\\test\\outputs\\htmlReports\\" + LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))+".html");
+        sparkReporter = new ExtentSparkReporter(".\\src\\test\\outputs\\htmlReports\\" + LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))+".html");
         sparkReporter.config().setDocumentTitle("Automation Report");
         sparkReporter.config().setReportName("Functional Testing");
         sparkReporter.config().setTheme(Theme.DARK);
@@ -69,6 +70,7 @@ public class ExtentReportManager implements ITestListener {
         // not implemented
     }
     public void onFinish(ITestContext context) {
+        reports.setSystemInfo("Test End Time", LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         reports.flush();
     }
 }
