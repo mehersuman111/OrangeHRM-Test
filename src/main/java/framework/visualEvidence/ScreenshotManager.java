@@ -1,5 +1,6 @@
 package framework.visualEvidence;
 
+import framework.globalConstants.PathConfig;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,7 +14,7 @@ public class ScreenshotManager {
     public static String takeScreenShot(String testName) throws IOException {
         TakesScreenshot takesScreenshot = (TakesScreenshot) TestInit.driver;
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        String targetFilePath = new String(System.getProperty("user.dir")+"\\outputs\\screenShots\\"+testName+timeStamp+".png");
+        String targetFilePath = new String(System.getProperty("user.dir")+ PathConfig.testOutput +"\\screenShots\\"+testName+timeStamp+".png");
         File targetFile = new File(targetFilePath);
         //sourceFile.renameTo(targetFile);
         FileUtils.copyFile(sourceFile,targetFile);

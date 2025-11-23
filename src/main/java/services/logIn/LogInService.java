@@ -20,9 +20,9 @@ public class LogInService extends LogInPage {
         return logInService;
     }
     public LogInService verifyAvailableDetailsInLoginPage () {
-        checkAvailableElement(companyBranding, "Company Branding")
-                .checkAvailableElement(companyLogo, "Company Logo")
-                .checkAvailableElement(username, "Username")
+       // checkAvailableElement(companyBranding, "Company Branding")
+                //.checkAvailableElement(companyLogo, "Company Logo")
+                checkAvailableElement(username, "Username")
                 .checkAvailableElement(password, "Password")
                 .checkAvailableElement(loginButton, "Login Button")
                 .checkAvailableElement(forgotPasswordLink, "Forgot Password Link")

@@ -2,6 +2,7 @@ package webTest.admin.userManagement;
 
 import framework.browserCofig.TestInit;
 import framework.listenerActions.RetryAnalyzer;
+import io.qameta.allure.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
 import pageObjects.admin.userMgmt.UserManagementScreen;
@@ -10,6 +11,12 @@ import testData.RandomData;
 
 public class UserManagementTest extends TestInit{
     @Test(priority = 1,retryAnalyzer = RetryAnalyzer.class)
+    @Description("To verify all available details in the User Management screen.")
+    @Epic("EPIC001")
+    @Feature("Feature 2: User Management")
+    @Story("Story 1: User Management screen elements")
+    @Step("Verify User Management screen")
+    //@Severity(SeverityLevel.MINOR)
     public void UI_UserManagement_01_Verify_UserManagement_Screen() throws InterruptedException {
         logger.info("Verifying all available elements in the User Management screen.");
         userManagementService.verifyAvailableDetailsInUserManagementPage();
